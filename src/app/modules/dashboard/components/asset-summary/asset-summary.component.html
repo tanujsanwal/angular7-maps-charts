@@ -1,0 +1,121 @@
+<div class="headline">
+  <p>Project summary</p>
+</div>
+<div class="asset-content">
+  <ng-container *ngFor="let card of cardTypes">
+    <ng-container [ngSwitch]="card">
+      <mat-card *ngSwitchCase="'village'">
+        <div class="meta">
+          <div class="img">
+            <mat-icon svgIcon="village-icon"></mat-icon>
+          </div>
+          <div class="text">
+            <h1>{{surveysMeta[card].total}}</h1>
+            <p>TOWNS SURVEYED</p>
+          </div>
+        </div>
+        <div class="list">
+          <div class="list-item">
+            <span class="text">Lives benefited</span>
+            <span class="numericals">{{surveysMeta[card].total_lives_benifited}}</span>
+          </div>
+          <div class="list-item">
+            <span class="text">Total house hold</span>
+            <span class="numericals">96078</span>
+          </div>
+          <!-- <div class="list-item">
+            <span class="text">HH connected to sewers</span>
+            <span class="numericals">6000</span>
+          </div> -->
+          <div class="list-item">
+            <span class="text">HH connected to sewer</span>
+            <span class="numericals">{{surveysMeta[card].connected_to_sewer}}</span>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card *ngSwitchCase="'naalas'">
+        <div class="meta">
+          <div class="img wave">
+            <mat-icon svgIcon="wave-icon"></mat-icon>
+          </div>
+          <div class="text">
+            <h1>{{surveysMeta[card].total}}</h1>
+            <p>NAALAS IDENTIFIED</p>
+          </div>
+        </div>
+        <div class="list">
+          <div class="list-item">
+            <span class="text">Tapped</span>
+            <span class="numericals">{{surveysMeta[card].tapped}}</span>
+          </div>
+          <div class="list-item">
+            <span class="text">Partially tapped</span>
+            <span class="numericals">{{surveysMeta[card].partially_tapped}}</span>
+          </div>
+          <div class="list-item">
+            <span class="text">Untapped</span>
+            <span class="numericals">{{surveysMeta[card].untapped}}</span>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card *ngSwitchCase="'treatment_plants'">
+        <div class="meta">
+          <div class="img plant">
+            <mat-icon svgIcon="water-icon"></mat-icon>
+          </div>
+          <div class="text">
+            <h1>{{surveysMeta[card].total}}</h1>
+            <p>TREATMENT PLANTS</p>
+          </div>
+        </div>
+        <div class="list">
+          <div class="list-item">
+            <span class="text">Operational</span>
+            <span class="numericals">{{surveysMeta[card].operational}}</span>
+          </div>
+          <div class="list-item">
+            <span class="text">Proposed</span>
+            <span class="numericals">{{surveysMeta[card].proposed}}</span>
+          </div>
+          <div class="list-item">
+            <span class="text">Capacity</span>
+            <span class="numericals">{{surveysMeta[card].capacity}} MLD</span>
+          </div>
+          <!-- <div class="list-item">
+            <span class="text">HH connected to sewers</span>
+            <span class="numericals">6000</span>
+          </div> -->
+          <!-- <div class="list-item">
+            <span class="text">Development capital (in crores)</span>
+            <span class="numericals">{{surveysMeta[card].development_capital}}</span>
+          </div> -->
+        </div>
+      </mat-card>
+      <mat-card *ngSwitchCase="'pumping_station'">
+        <div class="meta">
+          <div class="img pump">
+            <mat-icon svgIcon="pump-icon"></mat-icon>
+          </div>
+          <div class="text">
+            <h1>{{surveysMeta[card].total}}</h1>
+            <p>PUMPING STATIONS</p>
+          </div>
+        </div>
+        <div class="list">
+          <div class="list-item">
+            <span class="text">Operational</span>
+            <span class="numericals">{{surveysMeta[card].operational}}</span>
+          </div>
+          <!-- <div class="list-item">
+            <span class="text">HH connected to sewers</span>
+            <span class="numericals">6000</span>
+          </div> -->
+          <!-- <div class="list-item">
+            <span class="text">Development capital (in crores)</span>
+            <span class="numericals">{{surveysMeta[card].development_capital}}</span>
+          </div> -->
+        </div>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+</div>

@@ -1,0 +1,10 @@
+<agm-map [usePanning]="true" [styles]="mapStyles" [latitude]="options.lat" [longitude]="options.lng" [zoom]="options.zoom" [streetViewControl]="streetViewControl" [fullscreenControl]="false" [minZoom]="zoomOptions.min" [maxZoom]="zoomOptions.max" (mapTypeIdChange)="mapTypeChange($event)" [mapTypeControl]="true" (zoomChange)="zoomChange.next($event)" (centerChange)="zoomChange.next($event)" (mapClick)="mapClicked($event)">
+  <ng-container *ngFor="let area of areas">
+    <agm-polygon [paths]="area.polygonPath" [fillOpacity]="polygonOptions.fillOpacity" [strokeWeight]="polygonOptions.strokeWeight" [strokeOpacity]="polygonOptions.strokeOpacity" [strokeColor]="polygonOptions.strokeColor" (polyClick)="mapClicked($event)"></agm-polygon>
+  </ng-container>
+  <agm-marker-cluster [gridSize]="clusterOptions.gridSize" [averageCenter]="clusterOptions.averageCenter" [styles]="clusterOptions.styles">
+    <ng-container *ngFor="let marker of markers">
+      <agm-marker [title]="marker.name | titlecase" [label]="{text: (marker.name | titlecase), color: polygonOptions.labelColor, fontSize: '14px'}" [iconUrl]="{ url: (marker.project | iconUrl:marker.hover:marker.extras.status:marker.name === selectedMarker.name),  labelOrigin:{x:9,y:-10}}" (mouseOver)="toggle(marker, 'hover')" (mouseOut)="toggle(marker)" [latitude]="marker.latitude" [longitude]="marker.longitude" (markerClick)="markerClick(marker)"></agm-marker>
+    </ng-container>
+  </agm-marker-cluster>
+</agm-map>

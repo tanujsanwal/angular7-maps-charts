@@ -1,0 +1,22 @@
+<!-- <app-navbar></app-navbar> -->
+<section class="master-section">
+  <mat-sidenav-container class="dashboard-sidenav-container" [hasBackdrop]="false">
+    <mat-sidenav #navigator mode="over" opened="false">
+      <app-left-filter [selectedMarker]="markerData" (updatePosition)="markerClick($event)"></app-left-filter>
+    </mat-sidenav>
+    <mat-sidenav #markerDetails mode="over" position="end">
+      <!-- right sidenav -->
+      <app-marker-details-sidebar [markerDetails]="markerData" [showLoader]="showLoader" (markerClick)="markerClick($event)"></app-marker-details-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content class="dashboard-sidenav-content" fxLayout="row">
+      <div class="navigator-btn" (click)="navigator.toggle()" [class.open]="navigator.opened">
+        <mat-icon>{{navigator.opened ? 'chevron_left' : 'chevron_right'}} </mat-icon>
+      </div>
+      <app-filter-legend class="filter-legend-container" [class.open]="navigator.opened" [open]="false"></app-filter-legend>
+      <app-map [selectedMarker]="markerData" [areas]="areas" [resize]="resize" [options]="options" (markerClicked)="markerClick($event)"></app-map>
+      <button mat-raised-button class="reset-zoom-container" (click)="resetZoom()"> Reset zoom</button>
+      <app-asset-summary></app-asset-summary>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>
+<app-footer></app-footer>

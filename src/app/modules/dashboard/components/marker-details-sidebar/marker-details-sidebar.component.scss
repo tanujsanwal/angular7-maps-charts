@@ -1,0 +1,238 @@
+@import "../../../../../sass/variables";
+:host {
+    display: block;
+    width: $marker-detail-sidebar;
+}
+.title {
+    
+    .meta {
+        display: flex;
+        flex-direction: row;
+        padding: 1em;
+        .img {
+            flex-grow: 1;
+            .mat-icon {
+                font-size: 37px;
+                height: 37px;
+                width: 37px;
+                ::ng-deep {
+                    svg {
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+        .text {
+            margin-left: 1rem;
+            flex-grow: 8;
+            // display: flex;
+            align-items: center;
+            h1 {
+                display: flex;
+                // height: 19px;
+                // width: 186px;
+                color: #FFFFFF;
+                font-family: Roboto;
+                font-size: 16px;
+                font-weight: bold;
+                line-height: 19px;
+                margin: 0em;
+            }
+            p {
+                height: 19px;
+                // width: 82px;
+                color: #FFFFFF;
+                font-family: Roboto;
+                font-size: 16px;
+                line-height: 19px;
+                margin: 0;
+                font-weight: 300;
+                text-transform: uppercase;
+                padding-top: 5px;
+            }
+        }
+        .close {
+            flex-grow: 1;
+            // padding-top: 5px;
+            display: flex;
+            align-items: center;
+            mat-icon {
+                color: #000;
+                background: #fff;
+                border-radius: 50%;
+                padding: 2px;
+                height: 20px;
+                width: 20px;
+                font-size: 19px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.image {
+    img {
+        width: 300px;
+        height: 200px;
+    }
+}
+
+.content{
+    padding: 1em;
+    .plant {
+        .name {
+            font-size: 12px;
+            opacity: 0.8;
+            color: #212121;
+        }
+        .data {
+            font-size: 16px;
+            color: #212121;
+            margin-bottom: 1em;
+        }
+    }
+}
+
+
+
+.status {
+    margin-bottom: 30px;
+}
+
+.status img{ 
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.status p {
+    display: inline-block;
+    margin-bottom: 7px;
+}
+.status span {
+    display: block;
+    margin-top: 0px;
+}
+
+
+.characteristics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+}
+.char-name {
+    margin-top: 17px;
+}
+
+
+:host /deep/ .ng-image-slider-lightbox .lightbox-wrapper {
+    top: 65px !important;
+    height: 540px !important;
+    margin: 25px 50px;
+}
+
+:host /deep/  .close {
+    color: #000 !important;
+}
+
+// :host /deep/ .ng-image-slider-lightbox .lightbox-wrapper .lightbox-div img {
+//     width: 75%;
+// }
+:host /deep/ .ng-image-slider .container .main .main-inner .img-div {
+    margin: 0;
+}
+
+.content-row {
+    display: flex;
+    .plant {
+        flex: 1;
+    }
+}
+
+.content-naala{
+    .plant {
+        padding: 1em;
+        background: #f2f2f2;
+        .name {
+            font-size: 12px;
+            opacity: 0.8;
+            color: #212121;
+        }
+        .data {
+            font-size: 16px;
+            color: #212121;
+            margin-bottom: 1em;
+        }
+    }
+    .treatment-type {
+        padding: 1em;
+        .name {
+            font-size: 12px;
+            opacity: 0.8;
+            color: #212121;
+        }
+        .data {
+            font-size: 16px;
+            color: #212121;
+            margin-bottom: 1em;
+        }
+    }
+}
+
+.mat-divider {
+    border-top-width: 2px !important;
+}
+.mat-divider-naala {
+    margin: 1.5em 1em 0em;
+}
+
+.town-naala {
+    text-align: center;
+    font-weight: 400;
+    color: #212121;
+    .name {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+    .data {
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
+}
+.village-points {
+    .point {
+        color: #212121;
+        .point-data {
+            margin: 1em 0;
+            display: flex;
+            .meta-text {
+                flex: 1;
+                opacity: 0.8;
+                font-size: 14px;
+            }
+        }
+    }
+}
+.title-naala {
+    background-color: #955196 !important;
+}
+.title-treatment-plant {
+    background-color: #11405c !important;
+}
+.title-pumping-station {
+    background-color: #444e86 !important;
+}
+.home {
+    background-color: #002D72;
+}
+
+.spinner {
+    position: fixed;
+    top: 45%;
+    right: 10%;
+}
+
+.show-display {
+    display: flex;
+}

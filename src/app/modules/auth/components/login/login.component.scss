@@ -1,0 +1,22 @@
+.auth-card {
+    width: 400px;
+    margin: 0em auto;
+    box-sizing: border-box;
+}
+
+.label {
+    color: rgba(33,33,33,0.6);
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0.5em 0em;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-btn {
+    width: 120px;
+    text-transform: uppercase;
+}

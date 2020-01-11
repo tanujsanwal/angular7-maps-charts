@@ -1,0 +1,191 @@
+<div *ngIf="showLoader" class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="town-detail" *ngIf="!showLoader">
+  <div class="town-row">
+    <div class="town-name-back">
+      <span class="back-btn"  [routerLink]="'/data-management/town/'+townId">
+        Back
+      </span>
+      <span class="town-name">
+        {{data.name}}
+      </span> 
+    </div>
+      <div class="town-details">
+        <p class="created-on">
+          Created on
+        </p>
+        <p class="created-on-date">
+          {{data.created_at | date}}
+        </p>
+      </div>
+
+      <div class="town-details">
+        <p class="updated-on">
+            Last updated on
+        </p>
+        <p class="updated-on-date">
+          {{data.updated_at | date}}
+        </p>
+      </div>
+       
+      <div class="town-details">
+          <p class="updated-on">
+              STATUS
+          </p>
+          <p class="updated-on-date" *ngIf="townDetailData.is_published == true">
+            Published
+          </p>
+      </div>
+      <div class="detail-btn"  *ngIf="!noData && userObject.roles[0] == 'jalnigam' && townDetailData.is_published == false">
+          <button mat-raised-button color="primary" (click)="publishToDashboard()">Publish to dashboard</button>
+          <!-- <i class="material-icons" [matMenuTriggerFor]="flowMenu">
+            more_vert
+          </i> -->
+      </div>
+  </div>
+  
+<!-- <mat-menu class="flow-card-menu" #flowMenu="matMenu" [overlapTrigger]="false">
+  <ng-container *ngIf="data.show_in_dashboard">
+    <button mat-menu-item (click)="hideTown()">
+      <span>Hide town from dashboard</span>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="!data.show_in_dashboard">
+      <button mat-menu-item (click)="hideTown()">
+        <span>Unhide</span>
+      </button>
+    </ng-container>
+</mat-menu> -->
+
+<mat-divider></mat-divider>
+<div class="basic-detail-container">
+
+  <div class="basic-details">
+    <span class="basic-heading">
+      Basic details
+    </span>
+    
+    <!-- treatment plant -->
+    <div *ngIf="data.project.name =='treatment_plants'">
+        <div class="detail-row">
+          <span>Status of treatment plant </span>
+          <span> {{data.extras.status}}</span>
+        </div>
+        <div class="detail-row">
+          <span> Who is operating this</span>
+          <span> {{data.extras.operated_by}}</span>
+        </div>
+        <div class="detail-row">
+          <span>Type of treatment plant</span>
+          <span> {{data.extras.treatment_plant_type}}</span>
+        </div>
+        <div class="detail-row">
+          <span>Capacity of treatment plant (MLD)</span>
+          <span> {{data.extras.capacity}}</span>
+        </div>
+        <div class="detail-row">
+          <span>Current intake of treatment plant(MLD)</span>
+          <span> {{data.extras.intake}}</span>
+        </div>
+        <div class="detail-row">
+          <span>Technology of treatment plant</span>
+          <span> {{data.extras.technology}}</span>
+        </div>
+    </div>
+
+    <!-- if naalas -->
+    <div *ngIf="data.project.name == 'naalas'">
+        <div class="detail-row">
+          <span>Type of Drain/Nallah</span>
+          <span> {{data.extras.drain}}</span>
+        </div>
+
+        <div class="detail-row">
+          <span>Type of survey </span>
+          <span> {{data.extras.survey}}</span>
+        </div>
+        <div class="detail-row">
+          <span>Reason of pollution</span>
+          <span> {{data.extras.reason[0]}}</span>
+        </div>
+        <div class="detail-row">
+          <span> Present status of Drain/Nallah tapping for liquid waste</span>
+          <span> {{data.extras.status}}</span>
+        </div>
+        <div class="detail-row">
+          <span>  Flow in the stream (MLD)</span>
+          <span> {{data.extras.flow}}</span>
+        </div>
+
+
+
+    </div>
+
+    <!-- if pumping station -->
+    <div *ngIf="data.project.name == 'pumping_station'">
+      <div class="detail-row">
+        <span>Name of pumping station</span>
+        <span> {{data.extras.treatment_plant_name}}</span>
+      </div>
+      <div class="detail-row">
+        <span> Name of the treatment plant for which it is pumping station</span>
+        <span> {{data.extras.treatment_plant_type}}</span>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="geo-location">
+    <span class="heading">
+      Geolocation
+    </span> 
+    <span class="request" *ngIf="!geoLocation" (click)="request('request for location send')">
+      Request
+    </span>
+    <p *ngIf="!geoLocation">
+      Geolocation not added
+    </p>
+    <p *ngIf="geoLocation">
+     <b>Lat</b> : {{data.latitude}}
+     <b>Long</b> : {{data.longitude}}
+    </p>
+
+    <div class="photos-sec">
+      <span class="heading">
+        Photos
+      </span>
+      <span class="request" *ngIf="!photos" (click)="request('request for photos send')">
+        Request 
+      </span>
+      <p *ngIf="!photos">
+        No photos available
+      </p>
+      <p *ngIf="photos">
+        <img [src]="data.images[0]" class="photo">
+        <img [src]="data.images[1]" class="photo">
+
+      </p>
+    </div>
+
+    <div class="drain-nallah-sec" *ngIf="data.project.name == 'naalas'">
+      <span class="heading">
+        Point where Drain/Nallah meets Ganga
+      </span>
+      <span class="request" *ngIf="!nallahMeetGanga" (click)="request('request for point where nallah meets send')">
+        Request 
+      </span>
+      <p *ngIf="!nallahMeetGanga">
+        No data available
+      </p>
+      <p *ngIf="nallahMeetGanga">
+        <!-- <img [src]="data.images[0]"> -->
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</div>

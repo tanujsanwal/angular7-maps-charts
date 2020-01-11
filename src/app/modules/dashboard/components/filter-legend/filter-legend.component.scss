@@ -1,0 +1,96 @@
+@import "~@angular/material/theming";
+@import "../../../../../sass/variables";
+
+:host {
+    display: block;
+    position: absolute;
+    z-index: 9;
+    bottom: 1em;
+}
+
+.filter-legends {
+    @include mat-elevation(3);
+    background: #fff;
+    width: 200px;
+    height: 40px;
+    border-radius: 3px;
+    transition: 0.2s all ease-in-out;
+    overflow: hidden;
+    &.open {
+        height: 250px;
+    }
+}
+
+.legends-header-div {
+    height: 40px;
+    // padding: 0 1em;
+    border-bottom: 1px solid #ccc;
+}
+
+.legends-header {
+    margin: 0em;
+    padding: 0em 0.5em 0em 1em;
+    height: inherit;
+    align-items: center;
+    cursor: pointer;
+}
+
+.legends-list {
+    overflow-x: hidden;
+    overflow-y:auto;
+    transition: 0.2s all ease-in-out;
+    // transform: translate3d(0, -100%, 0);
+    visibility: hidden;
+    height: calc(100% - 41px);
+    // padding: 1em;
+    &.open {
+        // transform: none;
+        visibility: visible;
+    }
+}
+.legends-list-item {
+    font-weight: 300;
+    line-height: 2;
+    padding: 0.2em 1em;
+    &.sub-item {
+        background-color: rgba(33,33,33,0.05);
+        padding-left: 2em;
+        ::ng-deep {
+            .mat-checkbox-label {
+                align-items: center;
+                display: inline-flex;
+            }
+        }
+    }
+    .op, .tp, .pp_st {
+        height: 16px;
+        width: 16px;
+        // border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        margin-right: 0.3em;
+        background-size: contain;
+        background-position: center;
+    }
+
+    .op {
+        background-image: url('^assets/svgs/filter-legends/treatmentplant_operational.svg');
+        &.pp {
+            background-image: url('^assets/svgs/filter-legends/treatmentplant_proposed.svg');
+        }
+    }
+
+    .tp {
+        background-image: url('^assets/svgs/filter-legends/tapped.svg');
+        &.un {
+            background-image: url('^assets/svgs/filter-legends/untapped.svg');
+        }
+        &.pt {
+            background-image: url('^assets/svgs/filter-legends/partially_tapped.svg');
+        }
+    }
+
+    .pp_st {
+        background-image: url('^assets/svgs/filter-legends/pump.svg');
+    }
+}

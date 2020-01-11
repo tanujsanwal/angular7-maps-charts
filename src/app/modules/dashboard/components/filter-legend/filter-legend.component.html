@@ -1,0 +1,47 @@
+<div class="filter-legends" [class.open]="open">
+  <div class="legends-header-div">
+    <p fxLayout="row" class="legends-header" (click)="open = !open">
+      <span>Filter Legends</span>
+      <span fxFlex></span>
+      <mat-icon>{{open ? 'keyboard_arrow_down': 'keyboard_arrow_up'}}</mat-icon>
+    </p>
+  </div>
+  <form [formGroup]="filters" class="legends-list" [class.open]="open">
+    <!-- Treatment plant form -->
+    <div class="legends-list-item">
+      <mat-checkbox color="primary" formControlName="show_treatment_plants" [indeterminate]="(filters.get('treatment_plant').get('operational').value || filters.get('treatment_plant').get('proposed').value) && !(filters.get('treatment_plant').get('operational').value && filters.get('treatment_plant').get('proposed').value)">Treatment plants</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('treatment_plant').get('operational')"><span class="op"></span>Operational</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('treatment_plant').get('proposed')"><span class="op pp"></span>Proposed</mat-checkbox>
+    </div>
+    <!-- Naalas form -->
+    <div class="legends-list-item">
+      <mat-checkbox color="primary" formControlName="show_naalas" [indeterminate]="(filters.get('naalas').get('tapped').value || filters.get('naalas').get('untapped').value || filters.get('naalas').get('partially_tapped').value) && !(filters.get('naalas').get('tapped').value && filters.get('naalas').get('untapped').value && filters.get('naalas').get('partially_tapped').value)">Naalas</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('naalas').get('tapped')"><span class="tp"></span>Tapped</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('naalas').get('partially_tapped')"><span class="tp pt"></span>Partially tapped</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('naalas').get('untapped')"><span class="tp un"></span>Untapped</mat-checkbox>
+    </div>
+
+    <!-- Pumping Stations form -->
+    <div class="legends-list-item">
+      <mat-checkbox color="primary" formControlName="show_pumping_station" [indeterminate]="(filters.get('pumping_station').get('operational').value || filters.get('pumping_station').get('proposed').value) && !(filters.get('pumping_station').get('operational').value && filters.get('pumping_station').get('proposed').value)">
+        <span class="pp_st"></span>Pumping Stations
+      </mat-checkbox>
+    </div>
+    <!-- <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('pumping_station').get('operational')"><span class="op"></span>Operational</mat-checkbox>
+    </div>
+    <div class="legends-list-item sub-item">
+      <mat-checkbox color="primary" [formControl]="filters.get('pumping_station').get('proposed')"><span class="op pp"></span>Proposed</mat-checkbox>
+    </div> -->
+  </form>
+</div>

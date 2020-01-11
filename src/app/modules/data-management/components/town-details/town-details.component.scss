@@ -1,0 +1,101 @@
+.town-detail {
+    padding: 1em;
+    .town-row {
+        display: flex;
+        flex-direction: row;
+        padding: 1em;
+        .town-name-back {
+            flex: 1;
+            .back-btn {
+                margin-top: 3px;
+                color: #0072CE;
+                cursor: pointer;
+            }
+            .town-name {
+                font-weight: bold;
+                padding-left: 1em;
+                font-size: 20px;
+                text-transform: capitalize;
+            }
+        }
+        .detail-btn {
+            .material-icons{
+                padding: 0 1em 0 0;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .map-row {
+        display: flex;
+        flex-direction: row;
+        padding: 1em;
+        .town-map {
+            flex: 2;
+        }
+        .town-map-details{
+            padding: 1em;
+            flex: 3;
+            .town-row {
+                display: flex;
+                flex-direction: row;
+                 padding: 0em;
+                .text {
+                    flex: 1;
+                } 
+            }  
+            .station-plant-detail {
+                // display: block;
+                display: flex;
+                flex-direction: row;
+                padding-bottom: 1em;
+                .plant-detail {
+                    flex:1;
+                }
+                .plant-detail-data {
+                    flex:3;
+                    .normal-text {
+                        font-weight: 400;
+                    }
+                }
+                .show-count {
+                    padding-left: 2em;
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+
+            }
+        }
+        .detail-btn {
+            flex: 1;
+        }
+    }
+}
+
+.name {
+    color: #212121;
+    opacity: .6;
+}
+.spinner {
+    position: fixed;
+    top: 45%;
+    right: 45%;
+}
+.add-general-details{
+    text-align: center;
+    border: 1px solid rgba(33,33,33,0.1);
+    border-radius: 4px;
+    background-color: rgba(33,33,33,0.05);
+    padding: 1em 0;
+    margin: 1em 2em;
+}
+.town-hidden {
+    color: #FA4343;
+    font-weight: bold;
+}
+.edit-btn {
+    margin-top: 3px;
+    color: #0072CE;
+    cursor: pointer;
+    margin-left: 2em;
+}

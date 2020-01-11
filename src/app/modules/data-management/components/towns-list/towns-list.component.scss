@@ -1,0 +1,49 @@
+table {
+    width: 100%;
+}
+.add-town {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    .text {
+        margin-left: 1em; 
+        flex:1;
+        h2 {
+            margin: 0;
+        }
+        p {
+            margin: .5em 0 0 0;
+        }
+    }
+}
+
+.mat-header-cell {
+    font-size: 14px;
+    font-weight: 700;
+    background: #ccc;
+    color: rgba(4, 4, 4, 0.79);
+}
+
+.mat-row:hover {
+    background-color: rgba(0, 114, 206, 0.15);
+    cursor: pointer;
+    i {
+        visibility: visible;
+    }
+  }
+
+  i{
+    visibility: hidden;
+  }
+  .town-hidden {
+    color: #FA4343;
+    font-size: 14px;
+    line-height: 16px;
+}
+.password-icon {
+    font-size: 16px;
+    line-height: 21px;
+    vertical-align: middle;
+    margin-left: 10px;
+    cursor: pointer;
+}

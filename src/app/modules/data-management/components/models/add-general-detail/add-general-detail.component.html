@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Add general details</h1>
+<form [formGroup]="generalDetials">
+  <div mat-dialog-content>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Population (as per 2011 cencus)</mat-label>
+      <input matInput type="number" placeholder="Population (as per 2011 cencus)" autocomplete="off" formControlName="population">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Households of city (as per 2011 cencus)</mat-label>
+      <input matInput type="number" placeholder="Households of city (as per 2011 cencus)" autocomplete="off" formControlName="houses">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" formGroupName="extras">
+      <mat-label>Number of house hold connected with sewer</mat-label>
+      <input matInput type="number" placeholder="Number of house hold connected with sewer" autocomplete="off" formControlName="connected_households">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" formGroupName="extras">
+      <mat-label>Number of house hold remain to be connected with sewer</mat-label>
+      <input matInput type="number" placeholder="Number of house hold connected with sewer" autocomplete="off" formControlName="remaining_households">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="addGeneralDetails()">Submit</button>
+  </div>
+</form>

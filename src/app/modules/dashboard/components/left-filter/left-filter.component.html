@@ -1,0 +1,38 @@
+<div class="headline">
+  <div class="headline-text">
+      Navigator
+  </div>
+  <mat-form-field class="search-bar">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Haridwar, STP etc" autocomplete="off" [formControl]="searchInput"/>
+  </mat-form-field>
+</div>
+
+<div class="asset-content">
+  <mat-tree class="list-filter" [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding (click)="_updatePosition(node)" [class.selected]="selectedMarker && selectedMarker.uuid == node.data.uuid">
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled *ngIf="node.level < 2"></button>
+      <span>{{node.name  | splitString:'_'}}</span>
+      <span fxFlex></span>
+      <mat-icon class="hover-icon" svgIcon="map-hover-icon"></mat-icon>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding [class.selected]="selectedMarker && selectedMarker.uuid == node.data.uuid" [ngClass]="{'second-node' : (node.name == 'pumping_station' || node.name == 'treatment_plants' || node.name == 'naalas')}">
+      <button mat-icon-button [attr.aria-label]="'toggle ' + node.name" (click)="toggleTreeNode(node)">
+        <mat-icon>
+          {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+        </mat-icon>
+      </button>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex (click)="(node.level !== 1)&& _updatePosition(node)">
+        <span> {{node.name  | splitString:'_'}}</span> <span class="filter-count">({{node.count}})</span>
+        <span fxFlex></span>
+        <mat-icon class="hover-icon" svgIcon="map-hover-icon"></mat-icon>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>
+
+
+

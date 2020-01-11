@@ -1,0 +1,35 @@
+@import '~@angular/material/theming';
+
+.master-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s all ease-in-out;
+    height: 100%;
+}
+
+.logo-header {
+    width: 400px;
+    margin: 1em 0em;
+    margin-left: -20px;
+    .namami {
+        height: 80px;
+    }
+    .uk {
+        height: 54px;
+    }
+    p {
+        font-size: 24px;
+        opacity: 0.6;
+        color: #000000;
+    }
+}
+
+.company-sign {
+    color: #000000;
+    opacity: 0.6;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}

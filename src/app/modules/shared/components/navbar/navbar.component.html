@@ -1,0 +1,33 @@
+<ng-container *ngIf="userObject">
+  <mat-toolbar>
+    <img class="logo-img-1" src="./assets/images/namami.jpg"/>
+    <img class="logo-img-2" src="./assets/images/uk.png"/>
+    <h2 class="title">SPMG - Uttarakhand</h2>
+    <a class="navbar-link" [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+    <a class="navbar-link"  *ngIf="userObject.roles[0] == 'admin'" [routerLink]="['/data-management']" routerLinkActive="active">Data Management</a>
+    <a class="navbar-link"  *ngIf="userObject.roles[0] == 'jalnigam'" [routerLink]="'/data-management/town/'+townData" routerLinkActive="active">Data Management</a>
+    <a class="navbar-link"  *ngIf="userObject.roles[0] == 'jalsansthan'" [routerLink]="'/data-management/town/'+townData" routerLinkActive="active">Data Management</a>
+    <span class="flex"></span>
+    <button mat-icon-button class="notification-btn" [matMenuTriggerFor]="notificationsMenu">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button class="navbar-btn" [matMenuTriggerFor]="accountMenu">
+      <span class="user-initials">{{userInitials}}</span>
+    </button>
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item (click)="logout($event)">
+        Logout
+      </button>
+    </mat-menu>
+    <mat-menu #notificationsMenu="matMenu">
+      <mat-list class="notification-list">
+        <mat-list-item *ngFor="let message of notifications" class="notification-item">
+          <h3 matLine> <span>{{message.from}}</span> <span fxFlex></span> <span class="date">{{message.timestamp | date:'dd-MMM-yyyy'}}</span></h3>
+          <p matLine>
+            <span> {{message.subject}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-menu>
+  </mat-toolbar>
+</ng-container>

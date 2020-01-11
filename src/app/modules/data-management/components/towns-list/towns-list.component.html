@@ -1,0 +1,86 @@
+<div class="add-town">
+  <div class="text">
+    <h2>{{totalTown}}</h2>
+    <p>Total towns</p>
+  </div>
+  <div *ngIf="userObject.roles[0]=='admin'">
+      <button mat-raised-button color="primary" (click)="addTown()">Add town</button>
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- townName Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Town name </th>
+    <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)"> {{element.name}} 
+    <span class="town-hidden" *ngIf="!element.show_in_dashboard"> (Hidden)</span>
+    </td>
+  </ng-container>
+
+  <!-- kmlUpload Column -->
+  <ng-container matColumnDef="kmlUpload">
+    <th mat-header-cell *matHeaderCellDef> KML uploaded </th>
+    <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)"> yes</td>
+  </ng-container>
+
+  <!-- userid Column -->
+  <ng-container matColumnDef="userid">
+    <th mat-header-cell *matHeaderCellDef>Jal Sansthan Userid </th>
+    <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)"> {{element.jal_sansthan? element.jal_sansthan.username: 'N/A'}} </td>
+  </ng-container>
+
+  <!-- Password Column -->
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef>jal Sansthan Password <mat-icon class="password-icon" (click)="showPass()" *ngIf="userObject.roles[0]=='admin'">remove_red_eye</mat-icon> </th>
+    <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)" ><span *ngIf="showPassword">{{element.jal_sansthan_password? element.jal_sansthan_password: 'N/A'}}</span>  <span *ngIf="!showPassword">*******</span> </td>
+  </ng-container>
+
+  
+  <!-- userid Column -->
+  <ng-container matColumnDef="jaluserid">
+      <th mat-header-cell *matHeaderCellDef>Pay Jal Nigam Userid </th>
+      <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)"> {{element.jal_nigam? element.jal_nigam.username:'N/A'}} </td>
+    </ng-container>
+  
+    <!-- Password Column -->
+    <ng-container matColumnDef="jalpassword">
+      <th mat-header-cell *matHeaderCellDef>Pay Jal Nigam Password <mat-icon class="password-icon" (click)="showPass()" *ngIf="userObject.roles[0]=='admin'">remove_red_eye</mat-icon> </th>
+      <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)" ><span *ngIf="showPassword">{{element.jal_nigam_password? element.jal_nigam_password:'N/A'}}</span>  <span *ngIf="!showPassword">*******</span> </td>
+    </ng-container>
+
+  <!-- updatedOn Column -->
+  <ng-container matColumnDef="updated_at">
+    <th mat-header-cell *matHeaderCellDef> Last updated on </th>
+    <td mat-cell *matCellDef="let element" (click)="showTownDetail(element)"> {{element.updated_at |date }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element ; let i = index;"  (click)="deleteTown(element, i)"> 
+      <i class="material-icons" *ngIf="userObject.roles[0]=='admin'">
+        delete
+      </i>
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="share">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element" (click)="shareTown(element)"> 
+      <i class="material-icons">
+        share
+      </i>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element"  (click)="showTownDetail(element)"> 
+      <i class="material-icons">
+        edit
+      </i>
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

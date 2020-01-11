@@ -1,0 +1,6 @@
+@import "../../../../../sass/variables";
+
+.data-section {
+    padding-top: $toolbar-height;
+    height: calc(100% - #{$toolbar-height});
+}

@@ -1,0 +1,360 @@
+<h1 mat-dialog-title>Add asset</h1>
+<form [formGroup]="addAsset">
+  <div mat-dialog-content>
+    <div class="col-1">
+        <p class="heading">
+            Type of asset
+        </p>
+        <ng-container formGroupName="project">
+          <mat-radio-group class="example-radio-group" formControlName="name">
+            <mat-radio-button class="example-radio-button" value="treatment_plants">
+              Treatment plant
+            </mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="naalas">
+              Naala
+            </mat-radio-button>
+            <mat-radio-button class="example-radio-button" value="pumping_station">
+              Pumping station
+            </mat-radio-button>
+          </mat-radio-group>
+        </ng-container>
+        
+        <!-- <mat-divider></mat-divider> -->
+        
+        <!-- treatment plants -->
+        <ng-container *ngIf="addAsset.value.project.name === 'treatment_plants'">
+            <p class="heading">
+                Name of treatment plant
+            </p>
+            <mat-form-field appearance="outline">
+              <mat-label>Name of treatment plant</mat-label>
+              <input matInput placeholder="Name of treatment plant" autocomplete="off" formControlName="name">
+            </mat-form-field>
+
+            <ng-container formGroupName="extras">      
+              <p class="heading">
+                  Status of treatment plant
+              </p>
+              <mat-radio-group class="example-radio-group" formControlName="status">
+                <mat-radio-button class="example-radio-button" value="Operational">
+                    Operational
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Proposed" matTooltip="(under construction/tender stage/future proposed project)">
+                    Proposed 
+                </mat-radio-button>
+              </mat-radio-group>
+        
+              <div *ngIf="addAsset.value.extras.status == 'Operational'">
+                  <p class="heading">
+                      Who is operating this
+                  </p>
+                  <mat-radio-group class="example-radio-group" formControlName="operated_by">
+                    <mat-radio-button class="example-radio-button" value="jal_nigam">
+                        Pay jal nigam
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="jal_sansthan">
+                        Jal sansthan 
+                    </mat-radio-button>
+                  </mat-radio-group>
+              </div>
+              
+              <p class="heading">
+                  Type of treatment plant
+              </p>
+              <mat-form-field class="desig-depart-dropdown">
+                <mat-select formControlName="treatment_plant_type">
+                  <mat-option  value="stp">
+                    STP
+                  </mat-option>
+                  <mat-option  value="etp">
+                    ETP
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <div *ngIf="addAsset.value.extras.status == 'Operational'">
+                  <p class="heading">
+                      Current intake of treatment plant (MLD)
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <mat-label> Current intake of treatment plant (MLD)</mat-label>
+                    <input matInput placeholder=" Current intake of treatment plant (MLD)" autocomplete="off" formControlName="intake">
+                  </mat-form-field>
+              </div>
+             
+        
+              
+              <p class="heading">
+                  Capacity of treatment plant (MLD)
+              </p>
+              <mat-form-field appearance="outline">
+                <mat-label>Capacity of treatment plant (MLD)</mat-label>
+                <input matInput placeholder="Capacity of treatment plant (MLD)" autocomplete="off" formControlName="capacity">
+              </mat-form-field>
+        
+        
+              <p class="heading">
+                  Technology of treatment plant
+              </p>
+              <mat-form-field class="desig-depart-dropdown">
+                <mat-select formControlName="technology">
+                  <mat-option  value="Sequential Batch Reactor (SBR)">
+                    Sequential Batch Reactor (SBR) 
+                  </mat-option>
+                  <mat-option  value="others">
+                    others
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div *ngIf="addAsset.value.extras.technology == 'others'">
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter other technology</mat-label>
+                  <input matInput placeholder="Enter other technology" autocomplete="off" formControlName="other_technology">
+                </mat-form-field>
+              </div>
+
+              <div *ngIf="addAsset.value.extras.status == 'Proposed'">
+                  <p class="heading">
+                      Status of treatment plan
+                  </p>
+                  <mat-form-field class="desig-depart-dropdown">
+                    <mat-select formControlName="proposed_status">
+                      <mat-option  value="Tender yet to floated">
+                          Tender yet to floated
+                      </mat-option>
+                      <mat-option  value="Tender floated">
+                          Tender floated 
+                      </mat-option>
+                      <mat-option  value="Tender Awarded">
+                          Tender Awarded
+                      </mat-option>
+                      <mat-option  value="Under Construction">
+                          Under Construction
+                      </mat-option>
+                      <mat-option  value="Constructed (yet to operational)">
+                          Constructed (yet to operational)
+                      </mat-option>
+                      <mat-option  value="other">
+                          other
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+              <div *ngIf="addAsset.value.extras.proposed_status == 'other'">
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter other proposed status</mat-label>
+                  <input matInput placeholder="Enter other proposed status" autocomplete="off" formControlName="other_proposed_status">
+                </mat-form-field>
+              </div>
+            </ng-container>
+        </ng-container>
+
+        <!-- naalas -->
+        <ng-container *ngIf="addAsset.value.project.name === 'naalas'">
+          
+            <p class="heading">
+              Name of Drain/Nallah
+            </p>
+            <mat-form-field appearance="outline">
+              <mat-label>Name of Drain/Nallah</mat-label>
+              <input matInput placeholder="Name of Drain/Nallah" autocomplete="off" formControlName="name">
+            </mat-form-field>
+
+            <ng-container formGroupName="extras">            
+              <p class="heading">
+                  Type of Drain/Nallah
+              </p>
+              <mat-radio-group class="example-radio-group" formControlName="drain">
+                <mat-radio-button class="example-radio-button" value="Perennial">
+                    Perennial
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Non-Perennial">
+                    Non-Perennial
+                </mat-radio-button>
+              </mat-radio-group>
+              
+              <p class="heading">
+                  Type of survey 
+              </p>
+              <mat-radio-group class="example-radio-group" formControlName="survey">
+                <mat-radio-button class="example-radio-button" value="Liquid waste">
+                    Liquid waste
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Solid waste" disabled="true">
+                    Solid waste
+                </mat-radio-button>
+              </mat-radio-group>
+              
+              <p class="heading">
+                  Reason of pollution
+              </p>
+              <mat-form-field class="desig-depart-dropdown">
+                <mat-select formControlName="reason" multiple>
+                  <mat-option  value="Grey water">
+                    Grey water 
+                  </mat-option>
+                  <mat-option  value="Black water">
+                    Black water
+                  </mat-option>
+                  <mat-option  value="Solid waste">
+                    Solid waste
+                  </mat-option>
+                  <mat-option  value="Industrial effluent">
+                    Industrial effluent
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <p class="heading">
+                Present status of Drain/Nallah tapping for liquid waste
+              </p>
+              <mat-radio-group class="example-radio-group" formControlName="status">
+                <mat-radio-button class="example-radio-button" value="Tapped">
+                    Tapped
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Untapped">
+                    Untapped
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Partially tapped">
+                    Partially tapped
+                </mat-radio-button>
+              </mat-radio-group>
+              
+              <!-- if tapped -->
+              <div *ngIf="addAsset.value.extras.status == 'Tapped'">
+                <p class="heading">
+                    Type of treatment for tapped Drain/Nallah
+                </p>
+                <mat-radio-group class="example-radio-group" formControlName="proposed_status">
+                  <mat-radio-button class="example-radio-button" value="Sewage treatment plant">
+                      Sewage treatment plant
+                  </mat-radio-button>
+                  <mat-radio-button class="example-radio-button" value="Any other treatment">
+                      Any other treatment
+                  </mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field appearance="outline" *ngIf="addAsset.value.extras.proposed_status == 'Sewage treatment plant'">
+                  <mat-label>Name of the treatment plant </mat-label>
+                  <input matInput placeholder="Name of the treatment plant " autocomplete="off" formControlName="name">
+                </mat-form-field>
+                   
+                <div *ngIf="addAsset.value.extras.proposed_status == 'Any other treatment'">
+                  <p class="heading">
+                    Any other treatment?
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Any other treatment?</mat-label>
+                    <input matInput placeholder="Any other treatment?" autocomplete="off" formControlName="name">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- if Partially tapped -->
+              <div *ngIf="addAsset.value.extras.status == 'Partially tapped'">
+                <p class="heading">
+                    Type of treatment for Partly tapped Drain/Nallah
+                </p>
+                <mat-radio-group class="example-radio-group" formControlName="proposed_status">
+                  <mat-radio-button class="example-radio-button" value="Sewage treatment plant">
+                      Sewage treatment plant
+                  </mat-radio-button>
+                  <mat-radio-button class="example-radio-button" value="Any other treatment">
+                      Any other treatment
+                  </mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field appearance="outline" *ngIf="addAsset.value.extras.proposed_status == 'Sewage treatment plant'">
+                  <mat-label>Name of the treatment plant </mat-label>
+                  <input matInput placeholder="Name of the treatment plant " autocomplete="off" formControlName="name">
+                </mat-form-field>
+                    
+                <div *ngIf="addAsset.value.extras.proposed_status == 'Any other treatment'">
+                  <p class="heading">
+                    Any other treatment?
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Any other treatment?</mat-label>
+                    <input matInput placeholder="Any other treatment?" autocomplete="off" formControlName="name">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- proposed Un tapped -->
+              <div *ngIf="addAsset.value.extras.status == 'Untapped'">
+                  <p class="heading">
+                      Type of treatment  proposed Un- tapped Drain/Nallah
+                  </p>
+                  <mat-radio-group class="example-radio-group" formControlName="proposed_status">
+                    <mat-radio-button class="example-radio-button" value="Sewage treatment plant" matTooltip="It will be connected to Sewage treatment plant">
+                        Sewage treatment plant
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="Any other treatment">
+                        Any other treatment
+                    </mat-radio-button>
+                  </mat-radio-group>
+  
+                  <mat-form-field appearance="outline" *ngIf="addAsset.value.extras.proposed_status == 'Sewage treatment plant'">
+                    <mat-label>Name of the treatment plant </mat-label>
+                    <input matInput placeholder="Name of the treatment plant " autocomplete="off" formControlName="name">
+                  </mat-form-field>
+                      
+                  <div *ngIf="addAsset.value.extras.proposed_status == 'Any other treatment'">
+                    <p class="heading">
+                      Any other treatment?
+                    </p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Any other treatment?</mat-label>
+                      <input matInput placeholder="Any other treatment?" autocomplete="off" formControlName="name">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+
+              <p class="heading">
+                  Flow in the stream (MLD)
+                </p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Flow in the stream (MLD)</mat-label>
+                  <input matInput placeholder="Flow in the stream (MLD)" autocomplete="off" formControlName="flow">
+                </mat-form-field>
+            </ng-container>
+
+        </ng-container>
+
+
+        <!-- pumping station -->
+        <ng-container *ngIf="addAsset.value.project.name === 'pumping_station'">
+          
+            <p class="heading">
+                Name of pumping station
+            </p>
+            <mat-form-field appearance="outline">
+              <mat-label>Name of pumping station</mat-label>
+              <input matInput placeholder="Name of pumping station" autocomplete="off" formControlName="name">
+            </mat-form-field>
+            <ng-container formGroupName="extras">
+              <p class="heading">
+                  Name of the treatment plant for which it is pumping station
+              </p>
+              <mat-form-field appearance="outline">
+                <mat-label>Name of the treatment plant for which it is pumping station</mat-label>
+                <input matInput placeholder="Name of the treatment plant for which it is pumping station" autocomplete="off" formControlName="treatment_plant_type">
+              </mat-form-field>
+            </ng-container>
+        </ng-container>     
+
+    </div>
+    <div class="col-2">
+      <p>
+          Please enter the basic details about the asset. Gelocation and Image can be captured by the field agent. Once created, the asset will be available in the data collection mobile app.
+      </p>
+    </div>
+    
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)=addAssetDetail()>Create</button>
+  </div>
+</form>

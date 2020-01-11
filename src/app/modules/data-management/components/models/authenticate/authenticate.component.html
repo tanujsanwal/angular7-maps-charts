@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Authenticate </h1>
+<p>
+    You have to authenticate to see the password
+</p>
+<div mat-dialog-content>
+  
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>User ID</mat-label>
+    <input matInput placeholder="User ID" autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" type="password" autocomplete="off">
+    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    <!-- <mat-hint>Hint</mat-hint> -->
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="showPass()">Authenticate</button>
+</div>

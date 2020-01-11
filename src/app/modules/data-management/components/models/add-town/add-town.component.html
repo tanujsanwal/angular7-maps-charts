@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Add town</h1>
+<p>
+    Enter the town details and assign a userid and password for the town
+</p>
+<form [formGroup]="addTown">
+  <div mat-dialog-content>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Town name</mat-label>
+      <input matInput placeholder="Town name" autocomplete="off" formControlName="name">
+    </mat-form-field>
+    <!-- jal sansthan -->
+    <p> Jal sansthan detail</p>
+  <ng-container formGroupName="jal_sansthan">
+    <mat-form-field appearance="outline">
+      <mat-label>User ID</mat-label>
+      <input matInput placeholder="User ID" autocomplete="off" formControlName="email">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" autocomplete="off" formControlName="password">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+  </ng-container>
+  <!-- jal nigam -->
+  <p>
+    Jal nigam detail
+  </p>
+  <ng-container formGroupName="jal_nigam">
+    <mat-form-field appearance="outline">
+      <mat-label>User ID</mat-label>
+      <input matInput placeholder="User ID" autocomplete="off" formControlName="email">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" autocomplete="off" formControlName="password">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <!-- <mat-hint>Hint</mat-hint> -->
+    </mat-form-field>
+  </ng-container>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="addTowns()">Create</button>
+  </div>
+</form>

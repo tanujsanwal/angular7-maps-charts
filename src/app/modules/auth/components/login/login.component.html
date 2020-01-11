@@ -1,0 +1,22 @@
+<mat-card class="auth-card">
+  <mat-card-content>
+    <form class="login-form" [formGroup]="loginForm" ngSubmit="login()">
+      <p class="label">User Name</p>
+      <mat-form-field appearance="outline">
+        <!-- <input matInput placeholder="Email" formControlName="email"/> -->
+        <input matInput placeholder="User name" formControlName="username"/>
+      </mat-form-field>
+      <p class="label">Password</p>
+      <mat-form-field appearance="outline">
+        <input type="password" matInput placeholder="Password" formControlName="password"/>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <!-- <a class="link primary" [routerLink]="['..', 'forgot']">Forgot password</a> -->
+        <span fxFlex></span>
+        <button class="auth-btn" type="submit" mat-raised-button color="primary" (click)="login()">
+          Login
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

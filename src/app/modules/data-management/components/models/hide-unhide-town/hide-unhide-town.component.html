@@ -1,0 +1,20 @@
+<div *ngIf="data.show_in_dashboard">
+    Hide from dashboard - <span class="town-name">{{data.name}}</span>
+</div> 
+<div *ngIf="!data.show_in_dashboard">
+    Unhide - <span class="town-name">{{data.name}}</span>
+</div>
+<div mat-dialog-content>
+  
+  <p *ngIf="data.show_in_dashboard">
+      No one will be abe to see any assets related to this town on th dashboard after this. Are you sure you want to hide the information about the town from the dashboard? 
+  </p>
+  <p *ngIf="!data.show_in_dashboard">
+      All the details of the town will be shown on the dashboard. Are you sure you want to unhide the town?
+  </p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-raised-button color="primary" (click)="toggleHideTown()">Yes</button>
+</div>

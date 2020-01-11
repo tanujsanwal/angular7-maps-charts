@@ -1,0 +1,140 @@
+<div *ngIf="showLoader" class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="town-detail" *ngIf="!showLoader">
+  <div class="town-row">
+    <div class="town-name-back">
+      <span class="back-btn"  [routerLink]="['/data-management']">
+        Back
+      </span>
+      <span class="town-name">
+        {{data.name}}
+      </span> 
+      <span class="town-hidden" *ngIf="!data.show_in_dashboard">
+        (Hidden)
+      </span>
+
+      <span class="edit-btn" *ngIf="userObject.roles[0] == 'jalsansthan'" (click)="addGeneralDetail('edit')">
+        Edit
+      </span>
+    </div>
+      <div class="town-details">
+        
+      </div>
+      <div class="detail-btn"  *ngIf="!noData">
+          <!-- <i class="material-icons">
+            share
+          </i> -->
+          <!-- <i class="material-icons" (click)="addTownAsset(data)">
+            edit
+          </i> -->
+          <div *ngIf="userObject.roles[0] == 'jalnigam'">
+              <button mat-raised-button color="primary" (click)="addTownAsset(data)">Add asset</button>
+          </div>
+          <i class="material-icons" [matMenuTriggerFor]="flowMenu" *ngIf="userObject.roles[0]=='admin'">
+            more_vert
+          </i>
+      </div>
+  </div>
+
+  <div class="map-row" *ngIf="!noData">
+    <div class="town-map">
+        <app-town-map [data]="data"></app-town-map> 
+    </div>
+
+    <div class="town-map-details">
+      <div class="town-row">
+          <div class="text">
+            <h2>{{data.population}}</h2>
+            <p class="name">population</p>
+          </div>
+          <div class="text">
+            <h2>{{data.houses}}</h2>
+            <p class="name">House hold</p>
+          </div>
+          <div class="text">
+            <h2>{{data.extras.connected_households}}</h2>
+            <p class="name">House hold connected to sewer</p>
+          </div>
+      </div>
+
+      <div class="station-plant-detail">
+        
+        <div class="plant-detail name">
+              Treatment plants 
+        </div>
+        <div class="plant-detail-data show-count">
+          {{data.extras.total_treatment_plants}} 
+          <span class="normal-text">
+            (Operational - {{data.extras.operational_treatment_plants}}, Proposed - {{data.extras.proposed_treatment_plants}})
+          </span> 
+        </div>
+      </div>
+      <div class="station-plant-detail">
+        <div class="plant-detail name">
+            Naalas
+        </div>
+        <div class="plant-detail-data show-count">
+          {{data.extras.total_naalas}} 
+          <span class="normal-text">
+            (Tapped - {{data.extras.tapped_naalas}}, Partially tapped - {{data.extras.partially_tapped}}, Untapped - {{data.extras.untapped_naalas}})
+          </span>
+        </div>
+      </div>
+
+      <div class="station-plant-detail">
+        <div class="plant-detail name">
+            Pumping station
+        </div>
+        <div class="plant-detail-data show-count">
+          {{data.extras.total_pumping_station}} 
+        </div>
+      </div>
+
+      <div class="station-plant-detail">
+        <div class="plant-detail name">
+            Last updated on
+        </div>
+        <div class="plant-detail-data show-count">
+            {{data.updated_at |date}}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="detail-btn">
+  
+    </div>
+  </div>
+
+
+  
+<mat-menu class="flow-card-menu" #flowMenu="matMenu" [overlapTrigger]="false">
+  <ng-container *ngIf="data.show_in_dashboard">
+    <button mat-menu-item (click)="hideTown()">
+      <span>Hide town from dashboard</span>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="!data.show_in_dashboard">
+      <button mat-menu-item (click)="hideTown()">
+        <span>Unhide</span>
+      </button>
+    </ng-container>
+</mat-menu>
+</div>
+
+<app-asset-activity-list *ngIf="!showLoader && !noData" [dataSource]="dataSource"> </app-asset-activity-list>
+
+<div *ngIf="!showLoader && noData && userObject.roles[0] == 'jalsansthan'" class="add-general-details">
+  <p>
+      You need to add general details for the town to start adding assets.
+  </p>
+  <button mat-raised-button color="primary" (click)="addGeneralDetail('create')">+ Add general details</button>
+</div>
+
+<div *ngIf="!showLoader && noData && userObject.roles[0] != 'jalsansthan'" class="add-general-details">
+    <p>
+        Jal sansthan need to add general details for the town to start adding assets.
+    </p>
+  </div>

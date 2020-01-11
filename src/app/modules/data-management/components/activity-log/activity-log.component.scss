@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+}
+.mat-header-cell {
+    font-size: 14px;
+    font-weight: 700;
+    background: #ccc;
+    color: rgba(4, 4, 4, 0.79);
+}
+.lat-lon {
+    font-weight: 700;
+}
+.mat-row:hover {
+    cursor: pointer;
+    background-color: rgba(0, 114, 206, 0.15);
+}

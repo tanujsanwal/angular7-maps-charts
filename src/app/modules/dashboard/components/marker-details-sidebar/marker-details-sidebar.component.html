@@ -1,0 +1,247 @@
+<ng-container *ngIf="showLoader">
+  <span class="spinner">
+      <mat-spinner diameter="100"></mat-spinner>
+  </span>
+</ng-container>
+<ng-container *ngIf="markerDetails && !showLoader">
+  <div class="title" [ngClass]="{'title-naala': (markerDetails.project && markerDetails.project.name == 'naalas'),
+  'title-treatment-plant': (markerDetails.project && markerDetails.project.name == 'treatment_plants'), 
+  'title-pumping-station': (markerDetails.project && markerDetails.project.name == 'pumping_station'),
+  'home': markerDetails.project == null }">
+      <div class="meta">
+        <div class="img">
+          <ng-container *ngIf="markerDetails.project">
+            <mat-icon *ngIf="markerDetails.project.name == 'treatment_plants'" svgIcon="water-icon"></mat-icon>
+            <mat-icon *ngIf="markerDetails.project.name == 'pumping_station'" svgIcon="pump-icon"></mat-icon>
+            <mat-icon *ngIf="markerDetails.project.name == 'naalas'" svgIcon="wave-icon"></mat-icon> 
+          </ng-container>
+          <ng-container *ngIf="markerDetails.project == null">
+              <mat-icon svgIcon="village-icon"></mat-icon>
+          </ng-container>
+        </div>
+        <div class="text" [ngClass]="{'show-display': (markerDetails.project == null || !markerDetails.extras.status)}">
+          <h1>{{markerDetails.name}}</h1>
+          <p *ngIf="markerDetails.extras.status">{{markerDetails.extras.status}}</p>
+        </div>
+        <div class="close">
+          <mat-icon (click)="markerClicked('close')">close</mat-icon>
+        </div>
+      </div>
+  </div>
+  <!-- <div class="image" *ngIf="markerDetails.images.length > 0">
+    <img [src]="markerDetails.images[0]">
+  </div> -->
+  <!-- <slideshow *ngIf="markerDetails.images.length > 0" height="200px" [autoPlay]="false" arrowSize="10px" showDots="true" [imageUrls]="markerDetails.images"></slideshow> -->
+  <!-- <ng-image-slider *ngIf="markerDetails.images.length > 0"
+    [images]="markerDetails.images | imageFormater"
+    [imageSize]="{width: 300, height: 200}"
+    (imageClick)="imageOnClick($event)"
+    (arrowClick)="arrowOnClick($event)"
+    #nav></ng-image-slider>  -->
+    <ng-image-slider *ngIf="markerDetails.images.length > 0" #nav
+    [images]="markerDetails.images | imageFormater"
+    [infinite]="sliderInfinite"
+    [imagePopup]="sliderImagePopup"
+    [showArrow]="sliderArrowShow"
+    [imageSize]="{width: sliderImageWidth, height: sliderImageHeight}"
+    [autoSlide]="sliderAutoSlide ? 1 : 0"
+    [slideImage]="+sliderSlideImage"
+    [animationSpeed]="sliderAnimationSpeed"
+    (imageClick)="imageOnClick($event)"
+    (arrowClick)="arrowOnClick($event)"
+    (lightboxArrowClick)="lightboxArrowClick($event)"></ng-image-slider>
+  
+  <!-- treatment plant  -->
+  <div class="content">
+
+      <div class="plant" *ngIf="markerDetails.village">
+        <p class="name">Town</p>
+        <p class="data">{{markerDetails.village.name}}</p>
+      </div>
+
+      <div class="content-row">
+        <div class="plant" *ngIf="markerDetails.latitude">
+          <p class="name">Latitude</p>
+          <p class="data">{{markerDetails.latitude}}</p>
+        </div>
+        <div class="plant" *ngIf="markerDetails.longitude">
+          <p class="name">Longitude</p>
+          <p class="data">{{markerDetails.longitude}}</p>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+     
+
+    <div class="content-row">
+      <div class="plant" *ngIf="markerDetails.extras.treatment_plant_type">
+        <p class="name">Type of plant</p>
+        <p class="data">{{markerDetails.extras.treatment_plant_type}}</p>
+      </div>
+      <div class="plant" *ngIf="markerDetails.extras.capacity">
+        <p class="name">capacity (MLD)</p>
+        <p class="data">{{markerDetails.extras.capacity}} </p>
+      </div>
+    </div>
+
+    <div class="plant" *ngIf="markerDetails.extras.technology">
+      <p class="name">Technology used</p>
+      <p class="data">{{markerDetails.extras.technology}}</p>
+    </div>
+    <div class="plant" *ngIf="markerDetails.extras.intake">
+      <p class="name">Current Intake (MLD)</p>
+      <p class="data">{{markerDetails.extras.intake}}</p>
+    </div>
+    <mat-divider *ngIf="!markerDetails.extras.intake && markerDetails.extras.technology"></mat-divider>
+    
+    <div class="plant" *ngIf="markerDetails.extras.proposed_status">
+      <p class="name">proposed Status</p>
+      <p class="data">{{markerDetails.extras.proposed_status}}</p>
+    </div>
+
+    <!-- pumping station -->
+    <div class="plant" *ngIf="markerDetails.extras.treatment_plant_name">
+      <p class="name">Treatment Plant Name</p>
+      <p class="data">{{markerDetails.extras.treatment_plant_name}}</p>
+    </div>
+
+    <!-- naalas -->
+    <div class="plant" *ngIf="markerDetails.extras.flow">
+      <p class="name">Discharge (LPM)</p>
+      <p class="data">{{markerDetails.extras.flow}}</p>
+    </div>
+
+    <div class="plant" *ngIf="markerDetails.extras.reason">
+      <p class="name">Reason Of Pollution</p>
+      <span class="data"  *ngFor="let reason of markerDetails.extras.reason; let i = index;">{{reason}} 
+        <span *ngIf="i+1 < markerDetails.extras.reason.length">, </span>
+      </span>
+    </div>
+    <div class="plant" *ngIf="markerDetails.extras.drain">
+      <p class="name">Drain</p>
+      <p class="data">{{markerDetails.extras.drain}}</p>
+    </div>
+    <!-- <div class="plant" *ngIf="markerDetails.extras.status">
+      <p class="name">Status</p>
+      <p class="data">{{markerDetails.extras.status}}</p>
+    </div> -->
+    <!-- <div class="plant" *ngIf="markerDetails.extras.survey">
+      <p class="name">Survey</p>
+      <p class="data">{{markerDetails.extras.survey}}</p>
+    </div> -->
+    
+  
+    <!-- town -->
+    <div class="content-row">
+      <div class="plant" *ngIf="markerDetails.population">
+        <p class="name">population</p>
+        <p class="data">{{markerDetails.population}}</p>
+      </div>
+  
+      <div class="plant" *ngIf="markerDetails.houses">
+          <p class="name">Households</p>
+          <p class="data">{{markerDetails.houses}}</p>
+      </div>
+    </div>
+
+    <mat-divider *ngIf="markerDetails.project == null"></mat-divider>
+
+      <div class="town-naala" *ngIf="markerDetails.extras.total_naalas">
+          <p class="name">Total Nallas</p>
+          <p class="data">{{markerDetails.extras.total_naalas}}</p>
+      </div>
+
+      <div class="village-points" *ngIf="markerDetails.extras.tapped_naalas || markerDetails.extras.partially_tapped || markerDetails.extras.untapped_naalas">
+          <div class="point" >
+            <div class="point-data">
+              <span class="meta-text">Tapped</span>
+              <span> {{ markerDetails.extras.tapped_naalas }} </span>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-data">
+              <span class="meta-text">Partially Tapped</span>
+              <span> {{ markerDetails.extras.partially_tapped }} </span>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-data">
+              <span class="meta-text">Untapped</span>
+              <span> {{ markerDetails.extras.untapped_naalas }} </span>
+            </div>
+          </div>
+        </div>   
+        
+        <mat-divider *ngIf="markerDetails.project == null"></mat-divider>
+
+        <div class="town-naala" *ngIf="markerDetails.extras.total_treatment_plants">
+            <p class="name">Total Treatment Plants</p>
+            <p class="data">{{markerDetails.extras.total_treatment_plants}}</p>
+        </div>
+        <div class="village-points" *ngIf="markerDetails.extras.operational_treatment_plants || markerDetails.extras.proposed_treatment_plants ">
+          <div class="point" >
+            <div class="point-data">
+              <span class="meta-text">Operational</span>
+              <span> {{ markerDetails.extras.operational_treatment_plants }} </span>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-data">
+              <span class="meta-text">Proposed</span>
+              <span> {{ markerDetails.extras.proposed_treatment_plants }} </span>
+            </div>
+          </div>
+        </div>   
+
+        <mat-divider *ngIf="markerDetails.project == null"></mat-divider>
+
+        <div class="town-naala" *ngIf="markerDetails.extras.total_pumping_station">
+            <p class="name">Pumping Stations</p>
+            <p class="data">{{markerDetails.extras.total_pumping_station}}</p>
+        </div>
+        <!-- town ends -->
+  </div>
+
+  <div class="content-naala">
+      <div class="plant" *ngIf="markerDetails.extras.characterstic_water">
+          <span class="name">Water Characteristics</span>
+          <div class="status data">
+            <div class="characteristics">
+              <p></p>
+              <p class="name">BOD</p>
+              <p class="name">COD</p>
+              <p class="name">TSS</p>
+              <p class="name">MCOLI</p>
+            </div>
+            <div class="characteristics">
+              <p class="name char-name">Current: </p>
+              <p>{{ markerDetails.extras.characterstic_water.current.bod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.current.cod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.current.tss}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.current.mcoli}}</p>
+            </div>
+            <div class="characteristics">
+              <p class="name char-name">Summer: </p>
+              <p>{{ markerDetails.extras.characterstic_water.summer.bod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.summer.cod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.summer.tss}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.summer.mcoli}}</p>
+            </div>
+            <div class="characteristics">
+              <p class="name char-name">Winter: </p>
+              <p>{{ markerDetails.extras.characterstic_water.winter.bod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.winter.cod}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.winter.tss}}</p>
+              <p>{{ markerDetails.extras.characterstic_water.winter.mcoli}}</p>
+            </div>
+            
+          </div>
+      </div>
+      <mat-divider class="mat-divider-naala" *ngIf="markerDetails.extras.characterstic_water"></mat-divider>
+  
+      <div class="treatment-type" *ngIf="markerDetails.extras.treatment_type">
+        <p class="name">Treatment Plant where it will be tapped</p>
+        <p class="data">{{markerDetails.extras.treatment_type["Sewage treatment plant"]}}</p>
+      </div>
+  </div>
+</ng-container>
